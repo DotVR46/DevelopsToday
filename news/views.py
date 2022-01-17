@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.pagination import PageNumberPagination
 
 from news.models import News
@@ -21,3 +22,27 @@ class NewsDetailView(RetrieveAPIView):
     serializer_class = NewsDetailSerializer
     lookup_field = 'id'
     queryset = News.objects.all()
+
+
+class NewsDeleteView(DestroyAPIView):
+    serializer_class = NewsDetailSerializer
+    lookup_field = 'id'
+    queryset = News.objects.all()
+
+
+class NewsUpdateView(UpdateAPIView):
+    serializer_class = NewsDetailSerializer
+    lookup_field = 'id'
+    queryset = News.objects.all()
+
+
+class NewsCreateView(CreateAPIView):
+    serializer_class = NewsDetailSerializer
+    queryset = News.objects.all()
+
+
+def vote_news(request, id):
+    news = get_object_or_404(News, id=id)
+    news.upvotes += 1
+    news.save()
+    return HttpResponse('ok')

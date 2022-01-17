@@ -9,7 +9,7 @@ class News(models.Model):
     title = models.CharField(max_length=100)
     article = models.TextField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
     created = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
 

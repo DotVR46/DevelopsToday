@@ -8,7 +8,7 @@ class Comment(models.Model):
     """
     Модель комментария
     """
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='commenter')
     post = models.ForeignKey(News, on_delete=models.CASCADE, related_name='commented_post')
     content = models.CharField(max_length=450)
     created = models.DateTimeField(auto_now_add=True)
