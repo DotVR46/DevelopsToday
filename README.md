@@ -1,5 +1,9 @@
 # DevelopsToday assessment test
 
+### Upvotes url:
+
+`api/news/vote/<int:id>` 
+
 ## Heroku app:
 
 [damp-sierra-17362](http://damp-sierra-17362.herokuapp.com/swagger/)
